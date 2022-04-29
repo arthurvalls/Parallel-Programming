@@ -12,9 +12,6 @@ os convertendo de ponteiro pra void e no struct fazendo a conversão de volta pa
 o tipo que foi definido para a estrutura.
 
 Questão 4) Nas questões anteriores percebemos que em várias das execuções, a thread principal não foi a última a terminar. 
-O que foi consertado nesta questão ao utilizarmos a função join da biblioteca pthread,
-<<<<<<< HEAD
-que faz com que a thread principal aguarde as outras terminarem.
-=======
-que faz com que a thread principal aguarde as outras terminarem.
->>>>>>> f795075026bba9bfba79548decdde7276adf7e28
+O que foi consertado nesta questão ao utilizarmos a função join da biblioteca pthread, que faz com que a thread principal aguarde as outras terminarem.
+
+
