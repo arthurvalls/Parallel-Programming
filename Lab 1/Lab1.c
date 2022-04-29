@@ -6,8 +6,8 @@
 
 int vetor[LIMIT];
 
-// função que cada thread utilizará para elevar os elementos do vetor de sua respectiva parte ao quadrado
-void *elevar(void *arg)
+
+void *elevar(void *arg) // função que cada thread utilizará para elevar os elementos do vetor de sua respectiva parte ao quadrado
 {
     int ident = *(int *)arg;
     int i = (LIMIT / (ident)) - 1;
@@ -40,15 +40,15 @@ int main()
             printf("--ERRO: pthread_create()\n");
     }
 
-    // aguarda o término de execução das threads
-    for (i = 0; i < NTHREADS; i++)
+  
+    for (i = 0; i < NTHREADS; i++)   // aguarda o término de execução das threads
     {
         if (pthread_join(tid_sistema[i], NULL))
             printf("--ERRO: pthread_join\n");
     }
 
-    // testa caso ocorra erros
-    for (i = 0; i < LIMIT; i++)
+ 
+    for (i = 0; i < LIMIT; i++)  // testa caso ocorra erros
     {
         if (vetor[i] != (i * i))
         {
