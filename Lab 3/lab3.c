@@ -1,4 +1,3 @@
-// Soma todos os elementos de um vetor de inteiro
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -13,13 +12,13 @@ double concurrentTime, sequentialTime, largestSeq = 0, smallestSeq = 0, largestC
 void *tarefa(void *arg)
 {
     long int id = (long int)arg;         // identificador da thread
-    long int blockSize = N / nthreads; // tamanho do bloco de cada thread
-    long int start = id * blockSize;     // elemento inicial do bloco da thread
+    long int tamBloco = N / nthreads; // tamanho do bloco de cada thread
+    long int start = id * tamBloco;     // elemento inicial do bloco da thread
     long int end;                        // elemento final(nao processado) do bloco da thread
     if (id == nthreads - 1)
         end = N;
     else
-        end = start + blockSize; // trata o resto se houver
+        end = start + tamBloco; // trata o resto se houver
     for (long int i = start; i < end; i++)
     {
         if (vetor[i] > largestConc)
@@ -103,9 +102,9 @@ int main(int argc, char *argv[])
 
     printf("Aceleração do programa:  %lf\n", (sequentialTime/concurrentTime));
 
-    //verificacao de corretude
+    //corretude
    if(largestSeq != largestConc || smallestSeq != smallestConc){
-       fprintf(stderr, "ERRO--resultados sequencial e concorrente diferentes");
+       fprintf(stderr, "ERRO--número enconcontrado sequencial e concorrente diferentes");
    }
 
     // libera as areas de memoria alocadas
