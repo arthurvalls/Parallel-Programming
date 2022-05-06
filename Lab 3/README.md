@@ -54,4 +54,4 @@ N = 10^8 com 4 threads:
 
 Tempo sequencial:  0.223584 <br>
 Tempo concorrente:  0.092910 <br>
-Aceleração do programa:  2.406463 <br>
+Aceleração do programa:  2.406464 <br>
