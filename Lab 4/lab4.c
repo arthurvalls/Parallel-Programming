@@ -12,11 +12,11 @@ pthread_mutex_t mutex; // variavel de mutex para exclusao mutua
 
 int isPrime(int number)
 {
-    double root = sqrt(number);
-
+    
     if (number < 2) return 0;
 
-    for (int i = 2; i <= root ; i++) if (number % i == 0) return 0;
+    double squareRoot = sqrt(number);
+    for (int i = 2; i <= squareRoot ; i++) if (sqrt(number) % i == 0) return 0;
     return 1;
 }
 
