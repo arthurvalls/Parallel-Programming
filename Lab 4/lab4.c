@@ -4,38 +4,54 @@
 #include <math.h>
 #include "timer.h"
 
-long long int s = 0, N; // numero de elementos do vetor
-int nthreads;           // numero de threads
-int *vetor;             // vetor de entrada com dimensao N
-double concurrentTime, sequentialTime;
+long long int globalVar = 0, N;
+int nthreads, *vetor;
+float *sequentialArray, *concurrentArray;
+
 pthread_mutex_t mutex; // variavel de mutex para exclusao mutua
 
 int isPrime(int number)
 {
-    
-    if (number < 2) return 0;
+
+    if (number < 2)
+        return 0;
 
     double squareRoot = sqrt(number);
-    for (int i = 2; i <= squareRoot ; i++) if (sqrt(number) % i == 0) return 0;
+    for (int i = 2; i <= (squareRoot) + 1; i++)
+        if (number % i == 0)
+            return 0;
     return 1;
 }
 
-
-// funcao executada pelas threads
-void *ExecutaTarefa(void *arg)
+void sequentialPrimes(int *vetor, long long int N)
 {
-    
-    double *localArray = (double *)arg;
-
-    while (s < N)
+    for (long long int i = 0; i < N; i++)
     {
-        pthread_mutex_lock(&mutex);
-        s++;
-        pthread_mutex_unlock(&mutex);
-        if (isPrime(vetor[s]))
-            localArray[s] = sqrt(vetor[s]);
+        if (isPrime(vetor[i]))
+            sequentialArray[i] = sqrt(vetor[i]);
         else
-            localArray[s] = vetor[s];
+            sequentialArray[i] = vetor[i];
+    }
+}
+// funcao executada pelas threads
+void *task()
+{
+
+    pthread_mutex_lock(&mutex);
+    int localVar = globalVar;
+    globalVar++;
+    pthread_mutex_unlock(&mutex);
+
+    while (localVar < N)
+    {
+        if (isPrime(concurrentArray[localVar]))
+            concurrentArray[localVar] = sqrt(vetor[localVar]);
+        else
+            concurrentArray[localVar] = vetor[localVar];
+        pthread_mutex_lock(&mutex);
+        localVar = globalVar;
+        globalVar++;
+        pthread_mutex_unlock(&mutex);
     }
 
     pthread_exit(NULL);
@@ -46,8 +62,7 @@ int main(int argc, char *argv[])
     pthread_t *tid;
     int t;
     double start, end;
-    //double *localArray;
-    double *sequentialArray, *concurrentArray;
+    double concurrentTime, sequentialTime;
 
     if (argc < 3)
     {
@@ -56,6 +71,7 @@ int main(int argc, char *argv[])
     }
     N = atoi(argv[1]);
     nthreads = atoi(argv[2]);
+
     // aloca o vetor de entrada
     vetor = (int *)malloc(sizeof(int) * N);
     if (vetor == NULL)
@@ -63,43 +79,47 @@ int main(int argc, char *argv[])
         fprintf(stderr, "ERRO--malloc\n");
         return 2;
     }
+    sequentialArray = (float *)malloc(sizeof(float) * N);
+    if (vetor == NULL)
+    {
+        fprintf(stderr, "ERRO--malloc\n");
+        return 2;
+    }
+    concurrentArray = (float *)malloc(sizeof(float) * N);
+    if (vetor == NULL)
+    {
+        fprintf(stderr, "ERRO--malloc\n");
+        return 2;
+    }
+
     // preenche o vetor de entrada
-
-    sequentialArray = (double *)malloc(sizeof(double) * N);
-
     srand(time(NULL));
+    // int limit = pow(10,6);
+
     for (long int i = 0; i < N; i++)
+    {
         vetor[i] = rand() % N;
+    }
 
     // sequencial
     GET_TIME(start);
-
-    for (long long int i = 0; i < N; i++)
-    {
-        if (isPrime(vetor[i]))
-            sequentialArray[i] = sqrt(vetor[i]);
-        else
-            sequentialArray[i] = vetor[i];
-    }
-
+    sequentialPrimes(vetor, N);
     GET_TIME(end);
     sequentialTime = end - start;
     printf("Tempo sequencial = %lf\n", sequentialTime);
 
-    concurrentArray = (double *)malloc(sizeof(double) * N);
-    
     GET_TIME(start);
+    pthread_mutex_init(&mutex, NULL);
     tid = (pthread_t *)malloc(sizeof(pthread_t) * nthreads);
     if (tid == NULL)
     {
         fprintf(stderr, "ERRO--malloc\n");
         return 2;
     }
-    pthread_mutex_init(&mutex, NULL);
     for (t = 0; t < nthreads; t++)
     {
-        
-        if (pthread_create(&tid[t], NULL, ExecutaTarefa, (void *)concurrentArray))
+
+        if (pthread_create(tid + t, NULL, task, NULL))
         {
             printf("--ERRO: pthread_create()\n");
             exit(-1);
@@ -108,7 +128,7 @@ int main(int argc, char *argv[])
     //--espera todas as threads terminarem
     for (t = 0; t < nthreads; t++)
     {
-        if (pthread_join(tid[t], NULL))
+        if (pthread_join(*(tid + t), NULL))
         {
             printf("--ERRO: pthread_join() \n");
             exit(-1);
@@ -119,8 +139,23 @@ int main(int argc, char *argv[])
 
     concurrentTime = end - start;
     printf("Tempo concorrente = %lf\n", concurrentTime);
-    printf("Ganho de aceleração: %lf\n", sequentialTime/concurrentTime);
-    free(vetor);
+
+    for (int i = 0; i < N; i++)
+    {
+        if (concurrentArray[i] != sequentialArray[i])
+        {
+            printf("ERRO: Matrizes diferentes.\n");
+            break;
+        }
+        else
+            printf("Matrizes iguais.\n");
+        break;
+    }
+
+    printf("Ganho de aceleração: %lf\n", sequentialTime / concurrentTime);
+
+    free(sequentialArray);
+    free(concurrentArray);
     free(tid);
     return 0;
 }
