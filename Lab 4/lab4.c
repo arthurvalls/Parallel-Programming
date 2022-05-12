@@ -1,4 +1,4 @@
-//Laboratório 3 - Computação Concorrente
+//Laboratório 4 - Computação Concorrente
 //Nome: Arthur Valls da Costa Silva
 //DRE: 120177470
 
