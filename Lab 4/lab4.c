@@ -1,3 +1,7 @@
+//Laboratório 3 - Computação Concorrente
+//Nome: Arthur Valls da Costa Silva
+//DRE: 120177470
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
