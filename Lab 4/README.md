@@ -50,6 +50,6 @@ Ganho de desempenho =  1.570688 <br>
 
 N = 10ˆ8 com 4 thread:
 
-Tempo sequencial = 69.500758
-Tempo concorrente = 39.162392
-Ganho de desempenho =  1.774681
+Tempo sequencial = 69.500758 <br>
+Tempo concorrente = 39.162392 <br>
+Ganho de desempenho =  1.774681 <br>
