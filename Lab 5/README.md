@@ -20,4 +20,4 @@ ou seja, a variável global x nunca atingirá o valor = 2. <br>
 2 - Não, em algumas execuções foram printados os números 9, 19 e 23 pela thread B.
 
 3-4 -  Sim, podemos substituir pois, quando usamos o if ele verifica a condição apenas uma vez, enquanto com while ele sempre verifica, 
-logo a lógica da aplicação foi atendida todas as vezes. <br>
+logo a lógica da aplicação foi atendida todas as vezes. <br> 
