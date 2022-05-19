@@ -7,9 +7,9 @@ ou seja, a variável global x nunca atingirá o valor = 2. <br>
 
 5) Alterando o número de threads B para 2, e fazendo as devidas alterações para que o programa continue funcionando, 2 casos foram observados na saída do meu programa: <br>
 
-  I) Ambas as threads B são executadas após as threads A e dessa maneira o programa funciona normalmente e finaliza; <br>
+  - I) Ambas as threads B são executadas após as threads A e dessa maneira o programa funciona normalmente e finaliza; <br>
 
-  II) Apenas uma thread B finaliza printando "bye", pois o programa possui apenas um sinal de desbloqueio, logo apenas uma thread B é desbloqueada, e o programa não finaliza. <br>
+  - II) Apenas uma thread B finaliza printando "bye", pois o programa possui apenas um sinal de desbloqueio, logo apenas uma thread B é desbloqueada, e o programa não finaliza. <br>
 
 # Atividade 2: <br>
 
