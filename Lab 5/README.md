@@ -1,4 +1,4 @@
-#Atividade 1: <br>
+# Atividade 1: <br>
 
 2) Sim, o programa funcionou como esperado, printando a mensagem "bye" depois de printar dois "hello". <br>
 
@@ -11,11 +11,11 @@ ou seja, a variável global x nunca atingirá o valor = 2. <br>
 
   II) Apenas uma thread B finaliza printando "bye", pois o programa possui apenas um sinal de desbloqueio, logo apenas uma thread B é desbloqueada, e o programa não finaliza. <br>
 
-#Atividade 2: <br>
+# Atividade 2: <br>
 
 2) Sim, em todas as execuções foram printados dois "bye" após a thread B printar "hello". <br>
 
-#Atividade 3: <br>
+# Atividade 3: <br>
 
 2) Não, em algumas execuções foram printados os números 9, 19 e 23 pela thread B.
 
