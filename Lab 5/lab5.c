@@ -13,7 +13,7 @@ int x = 0;
 pthread_mutex_t x_mutex;
 pthread_cond_t x_cond;
 
-void *thread1(void *arg)
+void *thread1(void *t)
 {
     pthread_mutex_lock(&x_mutex);
     while (x < 4)
@@ -27,7 +27,7 @@ void *thread1(void *arg)
     pthread_exit(NULL);
 }
 
-void *thread2(void *arg)
+void *thread2(void *t)
 {
     pthread_mutex_lock(&x_mutex);
 
@@ -44,7 +44,7 @@ void *thread2(void *arg)
     pthread_exit(NULL);
 }
 
-void *thread3(void *arg)
+void *thread3(void *t)
 {
     pthread_mutex_lock(&x_mutex);
     if (x < 1)
@@ -60,7 +60,7 @@ void *thread3(void *arg)
     pthread_exit(NULL);
 }
 
-void *thread4(void *arg)
+void *thread4(void *t)
 {
     pthread_mutex_lock(&x_mutex);
     if (x < 1)
@@ -76,7 +76,7 @@ void *thread4(void *arg)
     pthread_exit(NULL);
 }
 
-void *thread5(void *arg)
+void *thread5(void *t)
 {
     pthread_mutex_lock(&x_mutex);
     printf("Seja bem-vindo!\n");
