@@ -20,3 +20,7 @@
 # Atividade 4: <br>
 
 3 - Sim, em todas as execuções foram impressos o valor esperado de 200000, visto que foi utilizado o método synchronized, ocasionando uma exclusão mútua entre as threads. <br>
+
+# Atividade 5: <br>
+
+1 - Código disponibilizado no repositório.
