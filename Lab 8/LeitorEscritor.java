@@ -1,5 +1,6 @@
-/* Disciplina: Computacao Concorrente */
-/* Prof.: Silvana Rossetto */
+// Laboratório 8 - Computação Concorrente
+// Nome: Arthur Valls da Costa Silva
+// DRE: 120177470
 /* Codigo: Leitores e escritores usando monitores em Java */
 /* -------------------------------------------------------------------*/
 
@@ -180,7 +181,7 @@ class Leitor_Escritor extends Thread {
 //--------------------------------------------------------
 // Classe principal
 class LeitorEscritor {
-    static final int L = 5;
+    static final int L = 4;
     static final int E = 3;
     static final int L_E = 3;
 
