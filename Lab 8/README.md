@@ -1,6 +1,6 @@
 Possíveis saídas:
 
-#Saída com 4 L, 3 E e 3 L_E:   
+# Saída com 4 L, 3 E e 3 L_E:   
 ```
 import verificaLE
 le = verificaLE.LE()
@@ -77,7 +77,7 @@ le.leitorBloqueado(1)
 Process finished with exit code 130
 ```
 
-Saída com 5 L, 5 E e 5 L_E: 
+# Saída com 5 L, 5 E e 5 L_E: 
 
 ```
 import verificaLE
