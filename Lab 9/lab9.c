@@ -2,6 +2,9 @@
 // Nome: Arthur Valls da Costa Silva
 // DRE: 120177470
 
+/*pode ser que tome algumas execucoes do codigo para que
+ele mude a ordem das frases, mas elas mudam e o codigo funciona*/
+
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -103,6 +106,9 @@ int main(int argc, char const *argv[])
         pthread_join(threads[i], NULL);
     }
 
+
+    sem_destroy(&condicao1);
+    sem_destroy(&condicao2);
 
     return 0;
 }
