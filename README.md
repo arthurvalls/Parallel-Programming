@@ -1,3 +1,3 @@
 # Concurrent-Computing
 
-trabalhos e labs feitos na aula de computação concorrente que abordam programação paralela.
+Assignments from my Parallel Programming (ICP361) classes at UFRJ
